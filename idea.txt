@@ -1,0 +1,18 @@
+Ethereum -> MongoDB
+
+getBlockchain(adres) -> blockchain : połączenie
+parseBlocks(od, do) -> status : przetworzenie na rekordy MongoDB, overwrite w bazie
+checkDBState(blockchain) -> status : ostatni blok, liczba dziur, hashe
+
+parseContract(adress, nazwa, ABI, od) :
+    1. sprawdzenie czy pod tym adresem jest kontrakt
+    2. pobranie z Etherscan jego nazwy, ABI, bloku startowego (jeśli nie podano)
+    3. zapisanie metadanych kontraktu
+    4. iteracja po blokach od startowego do latest
+        - transakcje -> wywołania funkcji publicznych + ether
+        - zarejestrowane eventy
+       -> zapisanie do kolekcji w MongoDB
+
+Pierwsze wystąpienie kontraktu -> próba pobrania abi i nazwy z Etherscan
+Zapis do tablicy (canDecode - yes/no)
+Kolejne wystąpienie -> dekodowanie
